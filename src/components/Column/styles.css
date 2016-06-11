@@ -1,13 +1,18 @@
 .base {
+  /* inline-block here allows us to use css-transitions on the span element */
+  display: inline-block;
+
   color: blue;
 }
 
 .highlighted {
   composes: base;
+
   font-size: 50px;
 }
 
 .notHighlighted {
   composes: base;
+
   font-size: 8px;
 }
