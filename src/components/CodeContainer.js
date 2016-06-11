@@ -4,7 +4,7 @@ import Column from './Column';
 
 const CodeContainer = () =>
   <div>
-    <Column highlighted={false} char={'h'} />
+    <Column highlighted={true} char={'h'} />
   </div>;
 
 export default CodeContainer;
