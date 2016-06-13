@@ -1,5 +1,18 @@
-export const INIT_CODE = 'INIT_CODE';
-export const initCode = code => ({ type: INIT_CODE, code });
+export const SET_CODE = 'SET_CODE';
+export const setCode = code => ({ type: SET_CODE, code });
+
+export const initCode = code => dispatch => {
+  dispatch(setCode(processCode(code)));
+};
+
+function processCode(code) {
+  return code
+    .split('\n')
+    .map(line => line
+      .split('')
+      .map(char => ({ highlighted: false, char }))
+    );
+}
 
 export const HIGHLIGHT_LINE = 'HIGHLIGHT_LINE';
 export const highlightLine = line => ({ type: HIGHLIGHT_LINE, line });
