@@ -1,10 +1,16 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 
-import Column from '../Column';
+import Line from '../Line';
 
-const CodeContainer = () =>
+const CodeContainer = ({ lines }) =>
   <div>
-    <Column highlighted={true} char={'h'} />
+    <pre>
+      {lines.map((line, i) => <Line key={i} columns={line} />)}
+    </pre>
   </div>;
+
+CodeContainer.propTypes = {
+  lines: PropTypes.array.isRequired
+};
 
 export default CodeContainer;
