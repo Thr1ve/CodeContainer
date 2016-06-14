@@ -18,6 +18,40 @@ const App = React.createClass({
   },
 
   highlightSomething() {
+    const { dispatch } = this.props;
+    thunk(200, () => {
+      dispatch(setHighlights([{ line: 0, columns: [0, 2] }]));
+    })
+      .thunk(200, () => {
+        dispatch(setHighlights([{ line: 0, columns: [1, 3] }]));
+      })
+      .thunk(200, () => {
+        dispatch(setHighlights([{ line: 0, columns: [2, 4] }]));
+      })
+      .thunk(200, () => {
+        dispatch(setHighlights([{ line: 0, columns: [3, 5] }]));
+      })
+      .thunk(200, () => {
+        dispatch(setHighlights([{ line: 0, columns: [4, 6] }]));
+      })
+      .thunk(200, () => {
+        dispatch(setHighlights([{ line: 0, columns: [5, 7] }]));
+      })
+      .thunk(200, () => {
+        dispatch(setHighlights([0]));
+      })
+      .thunk(200, () => {
+        dispatch(setHighlights([1]));
+      })
+      .thunk(200, () => {
+        dispatch(setHighlights([2]));
+      })
+      .thunk(200, () => {
+        dispatch(setHighlights([3]));
+      })
+      .thunk(200, () => {
+        dispatch(setHighlights([4]));
+      });
   },
 
   render() {
@@ -35,7 +69,7 @@ const App = React.createClass({
 
 function mapStateToProps(state) {
   return {
-    lines: state.lines
+    lines: state.get('lines')
   };
 }
 
