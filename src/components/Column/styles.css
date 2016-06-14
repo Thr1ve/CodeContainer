@@ -1,14 +1,14 @@
 .base {
   /* inline-block here allows us to use css-transitions on the span element */
   display: inline-block;
-  transition: 'all 0.3s';
-  font-size: 14px;
+  transition: all 0.2s;
+  font-size: 18px;
 }
 
 .highlighted {
   composes: base;
-  /*transform: 'translateZ(100px)'*/
-  color: blue;
+  transform: translateZ(200px) translateX(200px);
+  /*color: blue;*/
 }
 
 .notHighlighted {

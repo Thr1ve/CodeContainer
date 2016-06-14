@@ -23,6 +23,7 @@
   },
   "homepage": "https://github.com/Thr1ve/CodeContainer#readme",
   "dependencies": {
+    "@thr1ve/thunk": "^1.0.0",
     "@thr1ve/utils": "^1.3.1",
     "babel-core": "^6.9.1",
     "babel-loader": "^6.2.4",
