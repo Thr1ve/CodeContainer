@@ -3,22 +3,27 @@ import { List } from 'immutable';
 
 import Line from '../Line';
 
-const CodeContainer = ({ lines }) =>
-  <div>
-    <pre>
-      {
-        lines.map((line, i) =>
-          <Line
-            key={i}
-            columns={line}
-            lineNumber={i + 1}
-          />)
-      }
-    </pre>
-  </div>;
+const CodeContainer = React.createClass({
+  propTypes: {
+    lines: PropTypes.instanceOf(List)
+  },
 
-CodeContainer.propTypes = {
-  lines: PropTypes.instanceOf(List)
-};
+  render() {
+    return (
+      <div>
+        <pre>
+          {
+            this.props.lines.map((line, i) =>
+              <Line
+                key={i}
+                columns={line}
+                lineNumber={i + 1}
+              />)
+          }
+        </pre>
+      </div>
+    );
+  }
+});
 
 export default CodeContainer;
