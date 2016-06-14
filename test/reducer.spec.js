@@ -92,15 +92,20 @@ test('highlightColumn', t => {
 
   dispatch(initCode(exampleCode));
 
-  const before = getState().get('lines').get(0).get(0);
+  const before = getState().get('lines').getIn([0, 0]);
 
   dispatch(highlightColumn(0, 1));
 
-  const after = getState().get('lines').get(0).get(0);
+  const after = getState().get('lines').getIn([0, 0]);
 
   t.true(
     getState().get('lines').equals(expected),
     'can highlight an individual column in a single line'
   );
   t.is(before, after, 'columns not highlighted retain strict equality');
+
+  dispatch(highlightColumn(0, 2));
+
+  t.true(getState().getIn(['lines', 0, 1, 'highlighted']));
+  t.true(getState().getIn(['lines', 0, 1, 'highlighted']), 'previous highlights are not lost');
 });
