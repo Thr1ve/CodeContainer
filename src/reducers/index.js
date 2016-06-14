@@ -14,9 +14,7 @@ export default function codeReducer(state = defaultState, action) {
   switch (action.type) {
     case SET_CODE:
       const code = fromJS(action.code);
-      return state
-        .set('template', code)
-        .set('lines', code);
+      return state.set('template', code).set('lines', code);
     case HIGHLIGHT_LINE:
       return state.updateIn(
         ['lines', action.line],
@@ -28,7 +26,16 @@ export default function codeReducer(state = defaultState, action) {
         column => column.set('highlighted', true)
       );
     case SET_HIGHLIGHTS:
-      return state;
+      return state.set('lines',
+        action.highlights.reduce((prev, cur) => {
+          if (typeof cur === 'number') {
+            return prev.update(cur,
+              line => line.map(column => column.set('highlighted', true))
+            );
+          }
+          return prev;
+        }, state.get('template'))
+      );
     default:
       return state;
   }

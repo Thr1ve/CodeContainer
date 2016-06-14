@@ -1,9 +1,8 @@
 export const SET_CODE = 'SET_CODE';
 export const setCode = code => ({ type: SET_CODE, code });
 
-export const initCode = code => dispatch => {
+export const initCode = code => dispatch =>
   dispatch(setCode(processCode(code)));
-};
 
 function processCode(code) {
   return code

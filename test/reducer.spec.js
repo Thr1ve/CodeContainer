@@ -109,3 +109,29 @@ test('highlightColumn', t => {
   t.true(getState().getIn(['lines', 0, 1, 'highlighted']));
   t.true(getState().getIn(['lines', 0, 1, 'highlighted']), 'previous highlights are not lost');
 });
+
+test('setHighlights', t => {
+  const { exampleCode, store: { dispatch, getState } } = t.context;
+
+  const expected = fromJS([
+    [
+      { highlighted: true, char: 'a' },
+      { highlighted: true, char: 'b' },
+      { highlighted: true, char: 'c' }
+    ],
+    [
+      { highlighted: true, char: '1' },
+      { highlighted: true, char: '2' },
+      { highlighted: true, char: '3' }
+    ]
+  ]);
+
+  dispatch(initCode(exampleCode));
+
+  dispatch(setHighlights([0, 1]));
+
+  t.true(
+    getState().get('lines').equals(expected),
+    'can highlight entire lines'
+  );
+});
