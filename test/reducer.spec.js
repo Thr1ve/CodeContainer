@@ -126,6 +126,19 @@ test('setHighlights', t => {
     ]
   ]);
 
+  const expected2 = fromJS([
+    [
+      { highlighted: true, char: 'a' },
+      { highlighted: true, char: 'b' },
+      { highlighted: true, char: 'c' }
+    ],
+    [
+      { highlighted: false, char: '1' },
+      { highlighted: false, char: '2' },
+      { highlighted: true, char: '3' }
+    ]
+  ]);
+
   dispatch(initCode(exampleCode));
 
   dispatch(setHighlights([0, 1]));
@@ -133,5 +146,17 @@ test('setHighlights', t => {
   t.true(
     getState().get('lines').equals(expected),
     'can highlight entire lines'
+  );
+
+  dispatch(setHighlights([0, { line: 1, columns: [2] }]));
+
+  t.false(
+    getState().getIn(['lines', 1, 0, 'highlighted']),
+    'will reset previously highlighted characters'
+  );
+
+  t.true(
+    getState().get('lines').equals(expected2),
+    'can highlight individual columns'
   );
 });

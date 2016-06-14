@@ -32,6 +32,12 @@ export default function codeReducer(state = defaultState, action) {
             return prev.update(cur,
               line => line.map(column => column.set('highlighted', true))
             );
+          } else if (typeof cur === 'object') {
+            return prev.set(cur.line,
+              cur.columns.reduce((prev2, cur2) => {
+                return prev2.update(cur2, col => col.set('highlighted', true));
+              }, prev.get(cur.line))
+            );
           }
           return prev;
         }, state.get('template'))
