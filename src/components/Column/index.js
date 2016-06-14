@@ -8,6 +8,13 @@ const Column = React.createClass({
     highlighted: PropTypes.bool
   },
 
+  shouldComponentUpdate(nextProps) {
+    return (
+      this.props.highlighted !== nextProps.highlighted ||
+      this.props.char !== nextProps.char
+    );
+  },
+
   render() {
     const { highlighted, char } = this.props;
     return (

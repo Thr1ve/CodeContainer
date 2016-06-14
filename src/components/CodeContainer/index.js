@@ -8,6 +8,10 @@ const CodeContainer = React.createClass({
     lines: PropTypes.instanceOf(List)
   },
 
+  shouldComponentUpdate(nextProps) {
+    return this.props.lines !== nextProps.lines;
+  },
+
   render() {
     return (
       <div>

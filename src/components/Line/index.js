@@ -11,6 +11,10 @@ const Line = React.createClass({
     lineNumber: PropTypes.number
   },
 
+  shouldComponentUpdate(nextProps) {
+    return this.props.columns !== nextProps.columns;
+  },
+
   render() {
     return (
       <div className={styles.base}>
