@@ -1,4 +1,7 @@
-import { SET_CODE, SET_HIGHLIGHTS } from '../actions';
+import {
+  SET_CODE, SET_HIGHLIGHTS,
+  HIGHLIGHT_LINE, HIGHLIGHT_COLUMN
+} from '../actions';
 
 import { Map, List, fromJS } from 'immutable';
 
@@ -14,8 +17,13 @@ export default function codeReducer(state = defaultState, action) {
       return state
         .set('template', code)
         .set('lines', code);
+    case HIGHLIGHT_LINE:
+      return state.updateIn(
+        ['lines', action.line],
+        line => line.map(column => column.set('highlighted', true))
+      );
     case SET_HIGHLIGHTS:
-      return state
+      return state;
     default:
       return state;
   }

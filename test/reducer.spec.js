@@ -45,3 +45,31 @@ test('initCode', t => {
   t.true(getState().get('lines').equals(expected), 'can initialize lines');
   t.true(getState().get('template').equals(expected), 'can initialize template');
 });
+
+test('highlightLine', t => {
+  const { exampleCode, store: { dispatch, getState } } = t.context;
+
+  const expected = fromJS([
+    [
+      { highlighted: false, char: 'a' },
+      { highlighted: false, char: 'b' },
+      { highlighted: false, char: 'c' }
+    ],
+    [
+      { highlighted: true, char: '1' },
+      { highlighted: true, char: '2' },
+      { highlighted: true, char: '3' }
+    ]
+  ]);
+
+  dispatch(initCode(exampleCode));
+
+  const before = getState().get('lines').get(0);
+
+  dispatch(highlightLine(1));
+
+  const after = getState().get('lines').get(0);
+
+  t.true(getState().get('lines').equals(expected), 'can highlight an entire line');
+  t.is(before, after, 'lines not highlighted retain strict equality');
+});
