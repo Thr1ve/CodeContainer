@@ -22,6 +22,11 @@ export default function codeReducer(state = defaultState, action) {
         ['lines', action.line],
         line => line.map(column => column.set('highlighted', true))
       );
+    case HIGHLIGHT_COLUMN:
+      return state.updateIn(
+        ['lines', action.line, action.column],
+        column => column.set('highlighted', true)
+      );
     case SET_HIGHLIGHTS:
       return state;
     default:
